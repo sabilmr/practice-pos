@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>category</title>
+</head>
+<body>
+<!-- Table Start -->
+<div class="container-xxl flex-grow-1 container-p-y" layout:fragment="content">
+    <div class="row">
+        <div class="d-flex align-items-center">
+            <h3 class="mr-auto p-3">Category List</h3>
+            <div class="ms-auto" role="group">
+                <a class="btn btn-primary" th:href="@{~/category/add}">Tambah Category</a>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data, no :${category}">
+                <th scope="row" th:text="${no.index + 1}">1</th>
+                <td th:text="${data.name}"></td>
+                <td th:text="${data.description}"></td>
+                <td>
+                    <a th:href="@{~/category/detail/{id}(id=${data.id})}" class="btn btn-primary">
+                        Detail
+                    </a>
+                    <a th:href="@{~/category/edit/{id}(id=${data.id})}" class="btn btn-success">
+                        Edit
+                    </a>
+                    <a th:href="@{~/category/delete/{id}(id=${data.id})}" class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Table End -->
+</body>
+</html>
