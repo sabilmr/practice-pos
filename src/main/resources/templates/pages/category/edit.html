@@ -1,0 +1,37 @@
+<form xmlns:th="http://www.thymeleaf.org" th:action="@{~/category/update}" th:id="form-category" th:method="post" th:object="${category}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit Category</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" name="id" th:value="${category.id}">
+      <div class="mb-3">
+        <label for="name" class="form-label">Category Name</label>
+        <input type="text" class="form-control" id="name" name="name" th:value="${category.name}"
+               th:class="${#fields.hasErrors('name')}? 'form-control is-invalid': 'form-control'" placeholder="name">
+        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+          <span th:errors="*{name}"></span>
+        </div>
+        <div id="defaultFormControlHelp" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Category Description</label>
+        <input type="text" class="form-control" id="description" name="description" th:value="${category.description}"
+               th:class="${#fields.hasErrors('description')}? 'form-control is-invalid': 'form-control'" placeholder="description">
+        <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+          <span th:errors="*{description}"></span>
+        </div>
+        <div id="defaultFormControl" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success">Update</button>
+      <a  class="btn btn-secondary" th:href="@{~/category}">Close</a>
+    </div>
+  </div>
+</form>

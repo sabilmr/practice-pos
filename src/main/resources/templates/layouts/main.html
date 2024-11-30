@@ -8,8 +8,11 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
     <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-
     <meta name="description" content="" />
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" th:href="@{~/img/favicon/favicon.ico}" />
@@ -32,6 +35,8 @@
 
     <link rel="stylesheet" th:href="@{~/vendor/libs/apex-charts/apex-charts.css}" />
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -50,13 +55,6 @@
 
         </aside>
         <!-- end menu -->
-        <div class="modal fade" id="main-modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                </div>
-            </div>
-        </div>
 
         <!-- Layout container -->
         <div class="layout-page">
@@ -73,7 +71,13 @@
 
                 </div>
                 <!-- end content -->
+                <div class="modal fade" id="main-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
+                        </div>
+                    </div>
+                </div>
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme" th:replace="~{fragments/footer :: footer}">
 
@@ -109,5 +113,14 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+<script th:src="@{~/scripts/main-modal.js}"></script>
+
+<th:block layout:fragment="script">
+
+</th:block>
 </body>
 </html>

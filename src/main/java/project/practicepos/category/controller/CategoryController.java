@@ -1,14 +1,20 @@
 package project.practicepos.category.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import project.practicepos.category.request.CategoryRequest;
 import project.practicepos.category.response.CategoryResponse;
+import project.practicepos.category.response.Response;
 import project.practicepos.category.service.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,5 +29,86 @@ public class CategoryController {
         List<CategoryResponse> result = categoryService.get();
         modelAndView.addObject("category", result);
         return modelAndView;
+    }
+
+    @GetMapping("/data")
+    public ResponseEntity<Response> getData() {
+        List<CategoryResponse> result = categoryService.get();
+        return ResponseEntity.ok().body(
+                Response.builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message("Success")
+                        .data(result)
+                        .total(result.size())
+                        .build()
+        );
+    }
+
+    @GetMapping("/add")
+    public ModelAndView add() {
+        ModelAndView modelAndView = new ModelAndView("pages/category/add");
+        modelAndView.addObject("category", new CategoryRequest());
+        return modelAndView;
+    }
+
+    @PostMapping("/save")
+    public ModelAndView create(@ModelAttribute("category") @Valid CategoryRequest category, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("pages/category/add");
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("category", category);
+            return modelAndView;
+        }
+        this.categoryService.create(category);
+        return new ModelAndView("redirect:/category");
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView("pages/category/edit");
+        Optional<CategoryResponse> category = categoryService.getById(id);
+        if (category.isPresent()) {
+            modelAndView.addObject("category", category.get());
+            return modelAndView;
+        }
+        return new ModelAndView("redirect:/category");
+    }
+
+    @PostMapping("/update")
+    public ModelAndView update(@ModelAttribute("category") @Valid CategoryRequest category, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("pages/category/edit");
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("category", category);
+            return modelAndView;
+        }
+        this.categoryService.update(category.getId(), category);
+        return new ModelAndView("redirect:/category");
+    }
+
+    @GetMapping("/remove/{id}")
+    public ModelAndView remove(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView("pages/category/remove");
+        Optional<CategoryResponse> category = categoryService.getById(id);
+        if (category.isPresent()) {
+            modelAndView.addObject("category", category.get());
+            return modelAndView;
+        }
+        return new ModelAndView("redirect:/category");
+    }
+
+    @PostMapping("/remove")
+    public ModelAndView remove(@ModelAttribute("category") CategoryRequest category) {
+        this.categoryService.delete(category.getId());
+        return new ModelAndView("redirect:/category");
+    }
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView detail(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView("pages/category/detail");
+        Optional<CategoryResponse> category = categoryService.getById(id);
+        if (category.isPresent()) {
+            modelAndView.addObject("category", category.get());
+            return modelAndView;
+        }
+        return new ModelAndView("redirect:/category");
     }
 }

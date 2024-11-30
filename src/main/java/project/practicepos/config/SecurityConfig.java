@@ -24,6 +24,7 @@ public class SecurityConfig {
 //            Variabel WHITE_LIST_URL di atas adalah array String yang digunakan untuk menyimpan daftar URL
 //            yang dikecualikan dari proses otentikasi atau otorisasi dalam aplikasi, biasanya dalam konfigurasi keamanan seperti Spring Security.
             "/css/**","/img/**","/js/**","/vendor/**",
+            "/api/v1/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -58,7 +59,11 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()
+                )
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
                 );
+
         return http.build();
     }
 
