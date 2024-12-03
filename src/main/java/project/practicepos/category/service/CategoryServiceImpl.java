@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import project.practicepos.category.entity.CategoryEntity;
+import project.practicepos.category.model.CategoryEntity;
 import project.practicepos.category.repository.CategoryRepository;
-import project.practicepos.category.request.CategoryRequest;
-import project.practicepos.category.response.CategoryResponse;
+import project.practicepos.category.model.CategoryRequest;
+import project.practicepos.category.model.CategoryResponse;
 
 import java.util.*;
 import java.util.stream.Collectors;

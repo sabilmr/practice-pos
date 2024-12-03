@@ -23,7 +23,7 @@ public class SecurityConfig {
     private String[] WHITE_LIST_URL = new String[]{
 //            Variabel WHITE_LIST_URL di atas adalah array String yang digunakan untuk menyimpan daftar URL
 //            yang dikecualikan dari proses otentikasi atau otorisasi dalam aplikasi, biasanya dalam konfigurasi keamanan seperti Spring Security.
-            "/css/**","/img/**","/js/**","/vendor/**",
+            "/build/**","/images/**","/vendors/**",
             "/api/v1/**",
             "/v2/api-docs",
             "/v3/api-docs",

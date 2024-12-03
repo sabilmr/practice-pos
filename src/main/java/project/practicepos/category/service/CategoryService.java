@@ -1,7 +1,7 @@
 package project.practicepos.category.service;
 
-import project.practicepos.category.request.CategoryRequest;
-import project.practicepos.category.response.CategoryResponse;
+import project.practicepos.category.model.CategoryRequest;
+import project.practicepos.category.model.CategoryResponse;
 
 import java.util.List;
 import java.util.Optional;

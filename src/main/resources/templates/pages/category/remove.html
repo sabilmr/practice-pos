@@ -1,8 +1,7 @@
 <form xmlns:th="http://www.thymeleaf.org" th:action="@{~/category/remove}" th:id="form-category" method="post" th:object="${category}">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Detail Category</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title">Detail Category</h5>
     </div>
     <div class="modal-body">
       <input type="hidden" name="id" th:value="${category.id}">
