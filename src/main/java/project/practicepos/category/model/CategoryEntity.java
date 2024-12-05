@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import project.practicepos.product.model.ProductEntity;
+import project.practicepos.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +34,11 @@ public class CategoryEntity {
     public void addProduct(ProductEntity product) {
         products.add(product);
         product.setCategory(this);
+    }
+
+    public CategoryEntity(String name, String description) {
+        this.id = CommonUtil.getUUID();
+        this.name = name;
+        this.description = description;
     }
 }

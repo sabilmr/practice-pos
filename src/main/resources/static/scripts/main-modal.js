@@ -5,8 +5,19 @@ function showModal(url, title) {
         dataType: "html",
         success: function (result) {
             $('#main-modal').find('.modal-title').text(title);
-
             $('#main-modal').find('.modal-content').html(result);
+            var $dialog = $('#main-modal').find('.modal-dialog');
+            if(title === 'small'){
+                $dialog.addClass('modal-sm');
+            }
+
+            if(title === 'large'){
+                $dialog.addClass('modal-lg');
+            }
+
+            if(title === 'extra-large'){
+                $dialog.addClass('modal-xl');
+            }
 
             $('#main-modal').modal('show');
         }

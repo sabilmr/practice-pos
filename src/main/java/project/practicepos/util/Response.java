@@ -1,4 +1,4 @@
-package project.practicepos.category.response;
+package project.practicepos.util;
 
 import lombok.*;
 

@@ -8,6 +8,8 @@ import project.practicepos.category.model.CategoryEntity;
 import project.practicepos.category.repository.CategoryRepository;
 import project.practicepos.category.model.CategoryRequest;
 import project.practicepos.category.model.CategoryResponse;
+import project.practicepos.product.model.ProductEntity;
+import project.practicepos.product.model.ProductResponse;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,8 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<CategoryResponse> create(CategoryRequest categoryRequest) {
         CategoryEntity categoryEntity = this.convertReqToEntity(categoryRequest);
-
-        categoryEntity.setId(UUID.randomUUID().toString());
         try {
             this.categoryRepository.save(categoryEntity);
             log.info("Created category success: {}", categoryEntity);
@@ -94,6 +94,18 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryResponse convertEntityToRes(CategoryEntity categoryEntity) {
         CategoryResponse categoryResponse = new CategoryResponse();
         BeanUtils.copyProperties(categoryEntity, categoryResponse);
+
+        if (!categoryEntity.getProducts().isEmpty()) {
+            List<ProductResponse> product = new ArrayList<>();
+            for (ProductEntity productEntity : categoryEntity.getProducts()) {
+                ProductResponse productResponse = new ProductResponse();
+
+                BeanUtils.copyProperties(productEntity, productResponse);
+                productResponse.setCategoryName(categoryResponse.getName());
+                product.add(productResponse);
+            }
+            categoryResponse.setProducts(product);
+        }
         return categoryResponse;
     }
 
@@ -108,6 +120,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryEntity convertReqToEntity(CategoryRequest categoryRequest) {
         CategoryEntity categoryEntity = new CategoryEntity();
         BeanUtils.copyProperties(categoryRequest, categoryEntity);
+        categoryEntity.setId(UUID.randomUUID().toString());
         return categoryEntity;
     }
 

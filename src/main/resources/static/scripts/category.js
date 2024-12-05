@@ -17,7 +17,7 @@ $(document).ready (function(){
                 {data: 'id'},
                 {data: 'name'},
                 {data: 'description'},
-                {data: ''},
+                {data: ''}
             ],
             columnDefs: [
                 {

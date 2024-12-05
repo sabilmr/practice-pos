@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import project.practicepos.category.model.CategoryRequest;
 import project.practicepos.category.model.CategoryResponse;
-import project.practicepos.category.response.Response;
+import project.practicepos.util.Response;
 import project.practicepos.category.service.CategoryService;
 
 import java.util.List;
@@ -98,17 +98,6 @@ public class CategoryController {
     @PostMapping("/remove")
     public ModelAndView remove(@ModelAttribute("category") CategoryRequest category) {
         this.categoryService.delete(category.getId());
-        return new ModelAndView("redirect:/category");
-    }
-
-    @GetMapping("/detail/{id}")
-    public ModelAndView detail(@PathVariable String id) {
-        ModelAndView modelAndView = new ModelAndView("pages/category/detail");
-        Optional<CategoryResponse> category = categoryService.getById(id);
-        if (category.isPresent()) {
-            modelAndView.addObject("category", category.get());
-            return modelAndView;
-        }
         return new ModelAndView("redirect:/category");
     }
 }

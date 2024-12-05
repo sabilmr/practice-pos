@@ -27,10 +27,13 @@ public class ProductEntity {
     @Column(name = "price")
     private String price;
 
+    @Column(name = "stock")
+    private String stock;
+
     @Column(name = "on_order")
     private String onOrder;
 
-    @Column(name = "category_id", length = 36)
+    @Column(name = "category_id", length = 36, insertable = false, updatable = false)
     private String categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)

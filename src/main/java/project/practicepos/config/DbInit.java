@@ -9,6 +9,8 @@ import project.practicepos.auth.entity.RoleEntity;
 import project.practicepos.auth.entity.UserEntity;
 import project.practicepos.auth.repository.RoleRepository;
 import project.practicepos.auth.repository.UserRepository;
+import project.practicepos.category.model.CategoryEntity;
+import project.practicepos.category.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +24,34 @@ public class DbInit implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
         initRole();
         initUser();
+        initCategory();
+    }
+
+    private void initCategory() {
+        if (!categoryRepository.findAll().isEmpty()) {
+            return;
+        }
+
+        List<CategoryEntity> categories = Arrays.asList(
+                new CategoryEntity("Fashion", "Pakaian, Sepatu, Aksesoris"),
+                new CategoryEntity("Elektronik", "Laptop, Smartphone, TV, Peralatan Rumah Tangga"),
+                new CategoryEntity("Kesehatan", "Obat-obatan, Alat Medis, Suplemen"),
+                new CategoryEntity("Makanan", "Makanan Ringan, Minuman, Makanan Organik"),
+                new CategoryEntity("Hobi", "Mainan, Alat Musik")
+        );
+
+        try {
+            categoryRepository.saveAll(categories);
+            log.info("Save category success");
+        } catch (Exception e) {
+            log.error("Save category failed error : {}", e.getMessage());
+        }
     }
 
     public void initRole() {
