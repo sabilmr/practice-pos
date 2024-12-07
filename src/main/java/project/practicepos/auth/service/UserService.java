@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import project.practicepos.auth.entity.UserEntity;
+import project.practicepos.auth.model.UserEntity;
 import project.practicepos.auth.repository.UserRepository;
 
 import java.util.HashSet;

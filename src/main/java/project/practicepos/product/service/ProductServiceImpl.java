@@ -63,12 +63,36 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<ProductResponse> update(String id, ProductRequest productRequest) {
-        return Optional.empty();
+        ProductEntity result = this.getEntityById(id);
+        if (result == null) {
+            return Optional.empty();
+        }
+
+        convertReqToEntity(productRequest, result);
+        try {
+            this.productRepository.save(result);
+            log.info("Updated product success: {}", result);
+            return Optional.of(convertEntityToRes(result));
+        } catch (Exception e) {
+            log.error("Updated product failed error: {}", e.getMessage());
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<ProductResponse> delete(String id) {
-        return Optional.empty();
+        ProductEntity result = this.getEntityById(id);
+        if (result == null) {
+            return Optional.empty();
+        }
+        try {
+            this.productRepository.delete(result);
+            log.info("Deleted product success: {}", result);
+            return Optional.of(convertEntityToRes(result));
+        } catch (Exception e) {
+            log.error("Deleted product failed error: {}", e.getMessage());
+            return Optional.empty();
+        }
     }
 
     private ProductResponse convertEntityToRes(ProductEntity productEntity) {
@@ -103,5 +127,9 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setCategory(result);
         return productEntity;
 
+    }
+
+    private void convertReqToEntity(ProductRequest request, ProductEntity productEntity) {
+        BeanUtils.copyProperties(request, productEntity);
     }
 }

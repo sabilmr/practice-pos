@@ -123,4 +123,26 @@ $(document).ready(function(){
         var url = $(this).attr('href');
         showModal(url,'large');
     });
+
+    $('#main-modal').on('submit','#form-product', function (event) {
+        event.preventDefault();
+        var ajaxUrl = $(this).attr('action');
+        const data = convertFormToJSON($(this));
+        ajaxSubmit(ajaxUrl, data, dt_product);
+    });
+
+    $('#table-product').on('click', '.btn-edit', function (event) {
+        event.preventDefault();
+
+        var url = $(this).closest('button').attr('href');
+        showModal(url,'large');
+
+    });
+
+    $('#table-product').on('click', '.btn-delete', function (event) {
+        event.preventDefault();
+
+        var url = $(this).closest('button').attr('href');
+        showModal(url,'large');
+    });
 });

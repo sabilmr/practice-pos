@@ -1,4 +1,4 @@
-package project.practicepos.auth.entity;
+package project.practicepos.auth.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

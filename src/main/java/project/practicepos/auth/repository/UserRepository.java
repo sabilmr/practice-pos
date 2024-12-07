@@ -2,7 +2,7 @@ package project.practicepos.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import project.practicepos.auth.entity.UserEntity;
+import project.practicepos.auth.model.UserEntity;
 
 import java.util.Optional;
 

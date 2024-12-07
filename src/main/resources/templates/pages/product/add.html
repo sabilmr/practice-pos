@@ -21,7 +21,8 @@
                 <select id="categoryId" name="categoryId" th:value="${product.categoryId}"
                         th:class="${#fields.hasErrors('categoryId')}? 'form-control is-invalid': 'form-control'">
                     <option value="">Pilih Category</option>
-                    <option th:each="item : ${category}" th:value="${item.id}" th:text="${item.name}" th:selected="${item.id == product.categoryId}"></option>
+                    <option th:each="item : ${category}" th:value="${item.id}" th:text="${item.name}"
+                            th:selected="${item.id == product.categoryId}"></option>
                 </select>
                 <div th:if="${#fields.hasErrors('categoryId')}" class="invalid-feedback">
                     <span th:errors="*{categoryId}"></span>
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <div class="col mb-3">
-                <label for="stock" class="form-label">Product Name</label>
+                <label for="stock" class="form-label">Stock</label>
                 <input type="text" id="stock" name="stock" th:value="${product.stock}"
                        th:class="${#fields.hasErrors('stock')}? 'form-control is-invalid': 'form-control'" placeholder="stock" />
                 <div th:if="${#fields.hasErrors('stock')}" class="invalid-feedback">

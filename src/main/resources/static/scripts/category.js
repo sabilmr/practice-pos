@@ -53,7 +53,7 @@ $(document).ready (function(){
                     render: (data, type, full, meta) => {
                         var id = full['id'];
                         var editUrl = ajaxUrl.replace('data','edit') + '/' + id;
-                        var deleteUrl = ajaxUrl.replace('data','remove') + '/' + id;
+                        var deleteUrl = ajaxUrl.replace('data','delete') + '/' + id;
                         return (
                             '<div class="d-inline-block text-nowrap">' +
                             '<button class="btn btn-xs btn-primary btn-edit" href="'+ editUrl +'">Edit</button> &nbsp;' +

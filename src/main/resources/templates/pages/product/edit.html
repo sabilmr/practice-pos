@@ -1,0 +1,86 @@
+<form xmlns:th="http://www.thymeleaf.org" id="form-product" th:action="@{~/product/update}" th:method="post"
+      th:object="${product}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit Product</h5>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" name="id" th:value="${product.id}">
+      <div class="col mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" id="name" name="name" th:value="${product.name}"
+               th:class="${#fields.hasErrors('name')}? 'form-control is-invalid': 'form-control'" placeholder="name" />
+        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+          <span th:errors="*{name}"></span>
+        </div>
+        <div id="defaultForm" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="col mb-3">
+        <label for="categoryId" class="form-label">Category</label>
+        <select id="categoryId" name="categoryId" th:value="${product.categoryId}"
+                th:class="${#fields.hasErrors('categoryId')}?'form-control is-invalid': 'form-control'">
+          <option value="">Pilih Category</option>
+          <option th:each="item : ${category}" th:value="${item.id}" th:text="${item.name}"
+                  th:selected="${item.id == product.categoryId}">
+          </option>
+        </select>
+        <div th:if="${#fields.hasErrors('categoryId')}" class="invalid-feedback">
+          <span th:errors="*{categoryId}"></span>
+        </div>
+        <div id="defaultFormControl" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="col mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="text" id="quantity" name="quantity" th:value="${product.quantity}"
+               th:class="${#fields.hasErrors('quantity')}?'form-control is-invalid': 'form-control'" placeholder="quantity"/>
+        <div th:if="${#fields.hasErrors('quantity')}" class="invalid-feedback">
+          <span th:errors="*{quantity}"></span>
+        </div>
+        <div id="defaultFormCntrolHelp" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="col mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" id="price" name="price" th:value="${product.price}"
+               th:class="${#fields.hasErrors('price')}?'form-control is-invalid': 'form-control'" placeholder="price"/>
+        <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+          <span th:errors="*{price}"></span>
+        </div>
+        <div id="defaultFormControlHellp" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="col mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="text" id="stock" name="stock" th:value="${product.stock}"
+               th:class="${#fields.hasErrors('stock')}?'form-control is-invalid': 'form-control'" placeholder="stock"/>
+        <div th:if="${#fields.hasErrors('stock')}" class="invalid-feedback">
+          <span th:errors="*{stock}"></span>
+        </div>
+        <div id="defaultFormControlHelp" class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+      <div class="col mb-3">
+        <label for="onOrder" class="form-label">On Order</label>
+        <input type="text" id="onOrder" name="onOrder" th:value="${product.onOrder}"
+               th:class="${#fields.hasErrors('onOrder')}?'form-control is-invalid': 'form-control'" placeholder="on order"/>
+        <div th:if="${#fields.hasErrors('onOrder')}" class="invalid-feedback">
+          <span th:errors="*{onOrder}"></span>
+        </div>
+        <div class="form-text">
+          We'll never share your details with anyone else.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Update</button>
+      <a th:href="@{~/product}" class="btn btn-secondary">Close</a>
+    </div>
+  </div>
+</form>

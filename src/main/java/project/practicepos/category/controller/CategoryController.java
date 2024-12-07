@@ -84,9 +84,9 @@ public class CategoryController {
         return new ModelAndView("redirect:/category");
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView remove(@PathVariable String id) {
-        ModelAndView modelAndView = new ModelAndView("pages/category/remove");
+        ModelAndView modelAndView = new ModelAndView("pages/category/delete");
         Optional<CategoryResponse> category = categoryService.getById(id);
         if (category.isPresent()) {
             modelAndView.addObject("category", category.get());

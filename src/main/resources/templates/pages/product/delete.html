@@ -1,0 +1,58 @@
+<form xmlns:th="http://www.thymeleaf.org" id="form-product" th:action="@{~/product/remove}" method="post"
+      th:object="${product}">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete Product</h5>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="id" th:value="${product.id}">
+            <div class="col mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" id="name" name="name" class="form-control" th:value="${product.name}" readonly/>
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="categoryName" class="form-label">Category</label>
+                <input type="hidden" id="categoryId" name="categoryId" th:value="${product.categoryId}" />
+                <input type="text" id="categoryName" name="categoryName" class="form-control" th:value="${product.categoryName}" readonly>
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="quantity" class="form-label-group">Quantity</label>
+                <input type="text" id="quantity" name="quantity" class="form-control" th:value="${product.quantity}" readonly />
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="price" class="form-label-group">Price</label>
+                <input type="text" id="price" name="quantity" class="form-control" th:value="${product.price}" readonly />
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="stock" class="form-label-group">Stock</label>
+                <input type="text" id="stock" name="stock" class="form-control" th:value="${product.stock}" readonly />
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="onOrder" class="form-label-group">On Order</label>
+                <input type="text" id="onOrder" name="onOrder" class="form-control" th:value="${product.onOrder}" readonly />
+                <div class="form-text">
+                    We'll never share your details with anyone else.
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a th:href="@{~/product}" class="btn btn-secondary">Close</a>
+        </div>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-package project.practicepos.auth.request;
+package project.practicepos.auth.model;
 
 import lombok.*;
 
